@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ubicación de Plazas Comerciales</title>
+  <style>
+    body {
+      background-color: #0d1117; 
+      color: #e6edf3;           
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      color: #4fe383; 
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-size: 2.2rem;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(79, 227, 131, 0.3);
+    }
+
+    p.subtitulo {
+      color: #8b949e;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    
+    select {
+      background-color: #161b22;
+      color: #ffffff;
+      border: 1px solid #30363d;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    select:hover, select:focus {
+      border-color: #4fe383;
+      outline: none;
+      box-shadow: 0 0 10px rgba(79, 227, 131, 0.4);
+    }
+
+    iframe {
+      width: 90%;
+      max-width: 800px;
+      height: 380px;
+      border: 2px solid #30363d !important;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+      background-color: #161b22;
+      transition: border-color 0.3s ease;
+    }
+
+    iframe:hover {
+      border-color: #4fe383 !important;
+    }
+
+    .info-box {
+      background-color: rgba(22, 27, 34, 0.85); 
+      backdrop-filter: blur(8px);
+      border-left: 4px solid #4fe383;
+      padding: 20px 25px;
+      border-radius: 12px;
+      margin-top: 25px;
+      margin-bottom: 140px; 
+      width: 85%;
+      max-width: 750px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+      z-index: 2;
+    }
+
+    .info-box p {
+      margin: 10px 0;
+      color: #c9d1d9;
+      font-size: 1.05rem;
+    }
+
+    .info-box strong {
+      color: #4fe383;
+    }
+
+    .icon-ubicacion {
+      color: #4fe383;
+      vertical-align: middle;
+      margin-right: 6px;
+      filter: drop-shadow(0 0 4px rgba(79, 227, 131, 0.6));
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath fill='%231b2a1e' d='M0,120 L0,90 L15,70 L25,90 L35,50 L50,90 L60,40 L75,90 L85,60 L100,120 L120,80 L135,100 L150,45 L170,100 L185,65 L200,120 L220,70 L235,90 L250,30 L270,90 L285,60 L300,120 L320,80 L335,100 L350,50 L370,100 L385,70 L400,120 L420,60 L435,85 L450,20 L470,85 L485,55 L500,120 L520,75 L535,95 L550,40 L570,95 L585,65 L600,120 L620,80 L635,100 L650,35 L670,100 L685,60 L700,120 L720,70 L735,90 L750,25 L770,90 L785,55 L800,120 L820,85 L835,105 L850,45 L870,105 L885,70 L900,120 L920,65 L935,90 L950,30 L970,90 L985,60 L1000,120 L1020,75 L1035,95 L1050,40 L1070,95 L1085,65 L1100,120 L1120,80 L1135,100 L1150,50 L1170,100 L1185,70 L1200,120 Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-repeat: repeat-x;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ubicación de Plazas Comerciales</h1>
+  <p class="subtitulo">Selecciona una plaza para ver su posición en el mapa, dirección y coordenadas:</p>
+
+  <select id="plazaSelect" onchange="actualizarPlaza()">
+    <option 
+      value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.503463878199!2d-98.98320702478644!3d19.363946081903672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fc8ce2313a23%3A0x6b4476ef3a1b9b9a!2sCentro%20Tepozan!5e0!3m2!1ses-419!2smx!4v1727750000000!5m2!1ses-419!2smx"
+      data-direccion="Paseo del Tepozán 3, Tepozanes, 56420 Los Reyes Acaquilpan, Méx."
+      data-lat="19.363946"
+      data-lng="-98.980632">
+      Centro Tepozan
+    </option>
+
+    <option 
+      value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.7214902146903!2d-98.99182392478546!3d19.426543381858177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e370a248981d%3A0x7d01865584873133!2sPlaza%20Ciudad%20Jard%C3%ADn!5e0!3m2!1ses-419!2smx!4v1727750000000!5m2!1ses-419!2smx"
+      data-direccion="Av. Bordo de Xochiaca 3, CD Jardín, 57205 Nezahualcóyotl, Méx."
+      data-lat="19.426543"
+      data-lng="-98.989255">
+      Plaza Ciudad Jardín
+    </option>
+
+    <option 
+      value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.7753147585094!2d-99.083861!3d19.422176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f930e16c9e05%3A0x367fdfa705e46be9!2sPlaza%20Aeropuerto!5e0!3m2!1ses-419!2smx!4v1727750000000!5m2!1ses-419!2smx"
+      data-direccion="Calz. Ignacio Zaragoza 270, Industrial Puerto Aéreo, Venustiano Carranza, CDMX"
+      data-lat="19.422176"
+      data-lng="-99.083861">
+      Plaza Aeropuerto
+    </option>
+
+    <option 
+      value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.921312389108!2d-98.95021232478685!3d19.330232181938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e2e3f317b3ad%3A0x4a2a19ef4bc2d989!2sPlaza%20Sendero%20Ixtapaluca!5e0!3m2!1ses-419!2smx!4v1727750000000!5m2!1ses-419!2smx"
+      data-direccion="Carretera Federal México-Cuautla Km. 17.5, Santa Bárbara, 56530 Ixtapaluca, Méx."
+      data-lat="19.330232"
+      data-lng="-98.947637">
+      Plaza Sendero Ixtapaluca
+    </option>
+
+    <option 
+      value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.380231201923!2d-98.90382122478518!3d19.43573818185072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e43c5f2b8423%3A0x53df667bfbc995f5!2sPlaza%20Chimalhuacan!5e0!3m2!1ses-419!2smx!4v1727750000000!5m2!1ses-419!2smx"
+      data-direccion="Av. Nezahualcóyotl s/n, Santa María Nativitas, 56330 Chimalhuacán, Méx."
+      data-lat="19.435738"
+      data-lng="-98.901246">
+      Plaza Chimalhuacán
+    </option>
+
+    <option 
+      value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.001239812312!2d-99.10012312478477!3d19.45212318182012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f95d85215555%3A0x6b23112341231234!2sEncuentro%20Ocean%C3%ADa!5e0!3m2!1ses-419!2smx!4v1727750000000!5m2!1ses-419!2smx"
+      data-direccion="Av. del Taller 179, Moctezuma 2da Secc, Venustiano Carranza, CDMX"
+      data-lat="19.452123"
+      data-lng="-99.097548">
+      Encuentro Oceanía
+    </option>
+  </select>
+
+  <iframe id="mapaIframe" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+  <div class="info-box">
+    <p>
+      <svg class="icon-ubicacion" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+      </svg>
+      <strong>Dirección:</strong> <span id="txtDireccion"></span>
+    </p>
+    <p><strong>Latitud:</strong> <span id="txtLatitud"></span></p>
+    <p><strong>Longitud:</strong> <span id="txtLongitud"></span></p>
+  </div>
+
+  <script>
+    function actualizarPlaza() {
+      const select = document.getElementById("plazaSelect");
+      const opcionSeleccionada = select.options[select.selectedIndex];
+
+      document.getElementById("mapaIframe").src = select.value;
+
+      const direccion = opcionSeleccionada.getAttribute("data-direccion");
+      const latitud = opcionSeleccionada.getAttribute("data-lat");
+      const longitud = opcionSeleccionada.getAttribute("data-lng");
+
+      document.getElementById("txtDireccion").innerText = direccion;
+      document.getElementById("txtLatitud").innerText = latitud;
+      document.getElementById("txtLongitud").innerText = longitud;
+    }
+
+    actualizarPlaza();
+  </script>
+
+</body>
+</html>
